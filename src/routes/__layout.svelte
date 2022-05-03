@@ -1,6 +1,4 @@
 <slot/>
-<style global>
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
+
+<style windi:preflights:global windi:safelist:global>
 </style>

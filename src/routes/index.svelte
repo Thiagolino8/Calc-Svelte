@@ -1,13 +1,12 @@
 <script>
 import Calculator from "../modules/Calculator.svelte";
-
 </script>
 
 <div>
 <Calculator/>
 </div>
 
-<style lang="postcss">
+<style>
   div {
     @apply
       bg-gradient-to-r from-blue-400 to-green-500

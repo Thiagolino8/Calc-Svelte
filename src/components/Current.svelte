@@ -2,11 +2,11 @@
 	<slot />
 </div>
 
-<style lang="postcss">
+<style>
 	div {
-		@apply 
-  text-white
+		@apply text-white
   text-6xl
+	truncate
   font-bold;
 	}
 </style>

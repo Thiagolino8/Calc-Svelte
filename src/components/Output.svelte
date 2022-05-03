@@ -1,19 +1,17 @@
 <div>
-  <slot/>
+	<slot />
 </div>
 
-<style lang="postcss">
-  div {
-    @apply
-  flex
+<style>
+	div {
+		@apply flex
   col-span-full
   bg-black/60
   flex-col
-  items-end
+  items-start
   justify-around
   p-5
   break-all
-  h-28
-
-  }
+  h-32;
+	}
 </style>

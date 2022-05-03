@@ -1,11 +1,15 @@
-<button>
-	<slot />
+<script lang="ts">
+	export let value = ''
+	export let operation = (value: string) => {}
+</script>
+
+<button on:click={() => operation(value)}>
+	{value}
 </button>
 
-<style lang="postcss">
+<style>
 	button {
-		@apply
-  cursor-pointer
+		@apply cursor-pointer
   text-3xl
   font-semibold
   border

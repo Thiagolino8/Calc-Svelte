@@ -1,15 +1,13 @@
 <div>
-  <slot/>
+	<slot />
 </div>
 
-<style lang="postcss">
-  div {
-    @apply
-  h-screen
+<style>
+	div {
+		@apply h-screen
   w-full
   flex
   justify-center
-  items-center
-
-  }
+  items-center;
+	}
 </style>

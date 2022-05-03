@@ -1,28 +1,23 @@
-import adapter from '@sveltejs/adapter-static';
-import preprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-static'
+import preprocess from 'svelte-preprocess'
+import { windi } from 'svelte-windicss-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	preprocess: [preprocess(), windi({})],
+
 	kit: {
-		prerender: { default: true },
 		adapter: adapter({
-			// default options are shown
 			pages: 'build',
 			assets: 'build',
 			fallback: null,
+			precompress: true,
 		}),
-		/*
-        If you need to serve your file from a sub directory
-        paths: {
-            base: '/your-sub-dir',
-        },
-        */
-	},
-	preprocess: [
-		preprocess({
-			postcss: true,
-		}),
-	],
-};
 
-export default config;
+		prerender: {
+			default: true,
+		},
+	},
+}
+
+export default config
