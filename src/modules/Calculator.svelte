@@ -8,7 +8,7 @@
 	import { useStore } from '../store'
 	import { useActions } from '../actions'
 
-	const { previous, operation, current } = useStore()
+	const { previous, operation, current } = useStore
 	const { addDigit, chooseOperation, clear, deleteDigit, evaluate } = useActions
 </script>
 
@@ -19,8 +19,12 @@
 <div>
 	<Grid>
 		<Output>
-			<Previous>{`${$previous} ${$operation}`}</Previous>
-			<Current>{$current}</Current>
+			{#key $previous || $operation}
+				<Previous>{`${$previous} ${$operation}`}</Previous>
+			{/key}
+			{#key $current}
+				<Current>{$current}</Current>
+			{/key}
 		</Output>
 		<Span operation={clear} value="AC" />
 		<Button operation={deleteDigit} value="DEL" />

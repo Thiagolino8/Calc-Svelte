@@ -1,17 +1,12 @@
-<div>
-	<slot />
-</div>
-
-<style>
-	div {
-		@apply flex
+<div class="flex
+relative
   col-span-full
   bg-black/60
   flex-col
   items-start
-  justify-around
+  justify-between
   p-5
   break-all
-  h-32;
-	}
-</style>
+  h-32">
+	<slot />
+</div>

@@ -15,7 +15,6 @@ import Calculator from "../modules/Calculator.svelte";
       text-gray-900
       antialiased
       font-normal
-      font-sans
-
+      font-sans;
   }
 </style>

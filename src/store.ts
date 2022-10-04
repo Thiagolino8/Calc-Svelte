@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store';
 
-const previous = writable<string>('');
-const current = writable<string>('');
-const operation = writable<string>('');
-const overwrite = writable<boolean>(false);
+const previous = writable('');
+const current = writable('');
+const operation = writable('');
+const overwrite = writable(false);
 
-export const useStore = () => ({
+export const useStore = {
   previous,
   current,
   operation,
   overwrite
-})
+}

@@ -1,23 +1,18 @@
-import adapter from '@sveltejs/adapter-static'
-import preprocess from 'svelte-preprocess'
-import { windi } from 'svelte-windicss-preprocess'
+import adapter from '@sveltejs/adapter-auto';
+import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [preprocess(), windi({})],
+	preprocess: preprocess(),
 
 	kit: {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
 			fallback: null,
-			precompress: true,
+			precompress: false,
 		}),
-
-		prerender: {
-			default: true,
-		},
 	},
 }
 
-export default config
+export default config;

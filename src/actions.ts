@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { useStore } from './store'
-const { current, operation, previous, overwrite } = useStore()
+const { current, operation, previous, overwrite } = useStore
 
 const addDigit = (digit: string) => {
 	if (get(overwrite)) {
@@ -52,7 +52,7 @@ const deleteDigit = () => {
 		overwrite.set(false)
 		return
 	}
-	if (get(current) == '') {
+	if (get(current) === '') {
 		current.set(get(previous))
 		previous.set('')
 		operation.set('')
