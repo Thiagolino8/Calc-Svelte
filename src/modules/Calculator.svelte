@@ -22,7 +22,7 @@
 			{#key $previous || $operation}
 				<Previous>{`${$previous} ${$operation}`}</Previous>
 			{/key}
-			{#key $current}
+			{#key !!$current}
 				<Current>{$current}</Current>
 			{/key}
 		</Output>
