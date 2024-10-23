@@ -1,96 +1,94 @@
-import { get } from 'svelte/store'
-import { useStore } from './store'
-const { current, operation, previous, overwrite } = useStore
+import { store } from './store.svelte'
 
 const addDigit = (digit: string) => {
-	if (get(overwrite)) {
-		current.set(digit)
-		overwrite.set(false)
+	if (store.overwrite) {
+		store.current = digit
+		store.overwrite = false
 		return
 	}
-	if (get(current).length > 8) return
+	if (store.current.length > 8) return
 
-	if (get(current) == '0') {
-		if (digit == '.') {
-			current.set('0.')
+	if (store.current === '0') {
+		if (digit === '.') {
+			store.current = '0.'
 			return
 		}
-		current.set(digit)
+		store.current = digit
 		return
 	}
-	if (digit === '.' && get(current).includes('.')) return
-	current.set(`${get(current) || ''}${digit}`)
+	if (digit === '.' && store.current.includes('.')) return
+	store.current = `${store.current || ''}${digit}`
 }
 
 const chooseOperation = (op: string) => {
-	if (get(previous) === '' && get(current) === '') return
-	else if (get(current) === '') {
-		operation.set(op)
+	if (store.previous === '' && store.current === '') return
+	if (store.current === '') {
+		store.operation = op
 		return
 	}
-	if (get(previous) === '') {
-		previous.set(get(current))
-		current.set('')
-		operation.set(op)
+	if (store.previous === '') {
+		store.previous = store.current
+		store.current = ''
+		store.operation = op
 		return
 	}
-	previous.set(evaluated())
-	operation.set(op)
-	current.set('')
+	store.previous = evaluated()
+	store.operation = op
+	store.current = ''
 }
 
 const clear = () => {
-	overwrite.set(false)
-	previous.set('')
-	current.set('')
-	operation.set('')
+	store.overwrite = false
+	store.previous = ''
+	store.current = ''
+	store.operation = ''
 }
 
 const deleteDigit = () => {
-	if (get(overwrite)) {
-		current.set('')
-		overwrite.set(false)
+	if (store.overwrite) {
+		store.current = ''
+		store.overwrite = false
 		return
 	}
-	if (get(current) === '') {
-		current.set(get(previous))
-		previous.set('')
-		operation.set('')
+	if (store.current === '') {
+		store.current = store.previous
+		store.previous = ''
+		store.operation = ''
 		return
 	}
-	if (get(current).length === 1) {
-		current.set('')
+	if (store.current.length === 1) {
+		store.current = ''
 		return
 	}
-	current.set(get(current).slice(0, -1))
+	store.current = store.current.slice(0, -1)
 }
 
 const evaluate = () => {
-	if (get(operation) === '' || get(current) === '' || get(previous) === '') return
-	current.set(evaluated())
-	overwrite.set(true)
-	previous.set('')
-	operation.set('')
+	if (store.operation === '' || store.current === '' || store.previous === '') return
+	store.current = evaluated()
+	store.overwrite = true
+	store.previous = ''
+	store.operation = ''
 }
 
 const evaluated = () => {
-	const prev = Number(get(previous))
-	const curr = Number(get(current))
+	const prev = Number(store.previous)
+	const curr = Number(store.current)
 
-	if (isNaN(prev) || isNaN(curr)) return ''
+	if (Number.isNaN(prev) || Number.isNaN(curr)) return ''
 
-	switch (get(operation)) {
+	switch (store.operation) {
 		case '+':
-			overwrite.set(true)
+			store.overwrite = true
 			return (prev + curr).toString()
 		case '-':
-			overwrite.set(true)
+			store.overwrite = true
 			return (prev - curr).toString()
 		case '*':
-			overwrite.set(true)
+			store.overwrite = true
 			return (prev * curr).toString()
 		case '÷':
-			if (curr == 0) {
+			if (curr === 0) {
 				alert('Cannot divide by zero')
 				return ''
 			}
@@ -100,7 +98,7 @@ const evaluated = () => {
 	}
 }
 
-export const useActions = {
+export const actions = {
 	addDigit,
 	chooseOperation,
 	clear,
